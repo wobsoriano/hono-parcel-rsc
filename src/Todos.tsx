@@ -1,20 +1,33 @@
-"use server-entry";
+'use server-entry';
 
-type Todo = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-};
+import './client';
+import './Todos.css';
+import { Dialog } from './Dialog';
+import { TodoDetail } from './TodoDetail';
+import { TodoCreate } from './TodoCreate';
+import { TodoList } from './TodoList';
 
-export async function Todos() {
-  const resp = await fetch('https://jsonplaceholder.typicode.com/todos')
-  const todos = await resp.json() as Todo[];
-  return (
-    <ul>
-      {todos.map(todo => (
-        <li key={todo.id}>{todo.title}</li>
-      ))}
-    </ul>
-  );
+export async function Todos({ id }: { id?: number }) {
+	return (
+		<html style={{ colorScheme: 'dark light' }}>
+			<head>
+				<title>Todos</title>
+			</head>
+			<body>
+				<header>
+					<h1>Todos</h1>
+					<Dialog trigger="+">
+						<h2>Add todo</h2>
+						<TodoCreate />
+					</Dialog>
+				</header>
+				<main>
+					<div className="todo-column">
+						<TodoList id={id} />
+					</div>
+					{id != null ? <TodoDetail key={id} id={id} /> : <p>Select a todo</p>}
+				</main>
+			</body>
+		</html>
+	);
 }
