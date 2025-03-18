@@ -1,0 +1,31 @@
+{
+  "name": "hono-parcel-rsc",
+  "server": "dist/server.js",
+  "targets": {
+    "server": {
+      "source": "src/server.tsx",
+      "context": "react-server",
+      "includeNodeModules": {
+        "hono": false
+      }
+    }
+  },
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.8",
+    "@parcel/rsc": "^2.14.0",
+    "hono": "^4.7.4",
+    "react": "canary",
+    "react-dom": "canary"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/parcel-env": "^0.0.8",
+    "@types/react": "^19.0.11",
+    "@types/react-dom": "^19.0.4",
+    "parcel": "^2.14.0"
+  }
+}
